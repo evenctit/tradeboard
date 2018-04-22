@@ -1,0 +1,52 @@
+Hadoop setup on Macbook
+Download
+Download: https://archive.apache.org/dist/hadoop/common/hadoop-2.8.0/
+Jdk download: http://www.oracle.com/technetwork/java/javase/downloads/index.html
+
+Install hadoop
+tar -zxvf hadoop-2.8.0.tar.gz
+
+run vi /etc/profile to edit your environment with below
+JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-9.0.4.jdk/Contents/Home
+CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+HADOOP_HOME=/Users/evenchen/Documents/Hadoop/hadoop-2.8.0
+PATH=$JAVA_HOME/bin::$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$PATH:
+export JAVA_HOME
+export CLASSPATH
+export PATH
+
+after that, please run source /etc/profile to make it effective
+and then please run hadoop version command to verify it,below is my result after running hadoop version
+
+Evens-MBP:~ evenchen$ hadoop version
+Hadoop 2.8.0
+Subversion https://git-wip-us.apache.org/repos/asf/hadoop.git -r 91f2b7a13d1e97be65db92ddabc627cc29ac0009
+Compiled by jdu on 2017-03-17T04:12Z
+Compiled with protoc 2.5.0
+From source with checksum 60125541c2b3e266cbf3becc5bda666
+This command was run using /Users/evenchen/Documents/Hadoop/hadoop-2.8.0/share/hadoop/common/hadoop-common-2.8.0.jar
+
+
+Hadoop Configuration
+go to $hadoop_dir/etc/hadoop, and edit core-site.xml to hadoop file system
+<configuration>
+	<!--config temporary directory-->
+    <property>
+        <name>hadoop.tmp.dir</name>
+        <value>/Users/evenchen/Documents/Hadoop/hadoop-2.8.0/data</value>
+    </property>
+    <!--config file system-->
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://localhost:9000</value>
+    </property>
+</configuration>
+
+
+
+go to $hadoop_dir/etc/hadoop, and edit hadoop-env.sh to setup java_home
+
+Installation guide:
+https://www.cnblogs.com/fishbay/archive/2017/07/24/7229502.html
+http://localhost:50070/
+
