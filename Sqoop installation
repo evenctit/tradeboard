@@ -1,0 +1,16 @@
+Sqoop 安装
+Please download it from here :
+http://archive.cloudera.com/cdh5/cdh/5/sqoop-1.4.6-cdh5.5.2.tar.gz 
+
+Unzip it to your local folder
+Update /etc/profile to set the environment variables:
+sudo vi /etc/profile
+SQOOP_HOME=/Users/evenchen/Documents/Hadoop/sqoop
+PATH=$SQOOP_HOME/bin:$PATH
+export SQOOP_HOME
+export PATH
+
+And go to $SQOOP_HOME/conf, edit sqoop-env.sh,
+Update HADOOP_COMMON_HOME and HADOOP_MAPRED_HOME to your $HADOOP_HOME;and also update HIVE_HOME to your $HIVE_HOME;
+
+Go to command line, and type ‘sqoop help’, if no issue, then means installation successful.
