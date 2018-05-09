@@ -1,0 +1,54 @@
+Hive 安装
+参考: https://www.cnblogs.com/dxxblog/p/8193967.html
+Go to here to download stable Hive version:
+http://mirror.bit.edu.cn/apache/hive/stable-2/
+tar -zxf apache-hive-2.1.1-bin.tar -C /[yourpath]/hive
+
+run vi /etc/profile to configure environment :
+HIVE_HOME=/[yourpath]/hive
+PATH=$HIVE_HOME/bin:$PATH
+
+Source /etc/profile
+Then run hive —version to verify installation
+
+为什么集成mysql来替换Derby
+ 默认情况下，Hive元数据保存在内嵌的Derby数据库中，只能允许一个会话连接，只适合简单的测试。实际生产环境中不使用，为了支持多用户会话，
+则需要一个独立的元数据库，使用MySQL作为元数据库，Hive内部对MySQL提供了很好的支持。
+
+Download mysql driver from here : https://dev.mysql.com/downloads/connector/j/
+And put the driver to /[yourpath]/hive/lib 下面
+
+Install mysql
+Go to here to download mysql https://dev.mysql.com/downloads/file/?id=476460
+Please reference to this guide https://blog.csdn.net/pansanday/article/details/54915916 to install mysql under Mac
+
+cp hive-default.xml.template hive-site.xml
+找出以下4个properties,并删除，然后用以下替换,记得换上自己的密码。
+<property>
+      <name>javax.jdo.option.ConnectionUserName</name>
+      <value>root</value>
+  </property>
+  <property>
+      <name>javax.jdo.option.ConnectionPassword</name>
+      <value>123456</value>
+  </property>
+ <property>
+      <name>javax.jdo.option.ConnectionURL</name>
+      <value>jdbc:mysql://localhost:3306/hive</value>
+  </property>
+  <property>
+      <name>javax.jdo.option.ConnectionDriverName</name>
+      <value>com.mysql.jdbc.Driver</value>
+  </property>
+添加以下代码到hive-site.xml
+<property>
+    <name>system:java.io.tmpdir</name>
+    <value>/tmp/hive/java</value>
+  </property>
+  <property>
+    <name>system:user.name</name>
+    <value>${user.name}</value>
+  </property>
+
+
+
