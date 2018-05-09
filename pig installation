@@ -1,0 +1,25 @@
+pig installation
+Download it from here: http://mirrors.aliyun.com/apache/pig/
+
+Sudo vi /etc/profile to add environment variables with below information
+
+PIG_HOME=/[your_path_to_pig]/pig
+PIG_CLASSPATH=$HADOOP_HOME/etc/hadoop. — please note it points to Hadoop path
+PATH=$PIG_HOME/bin:$PATH
+export PIG_HOME
+export PIG_CLASSPATH
+export PATH
+
+
+使用， go to command line and type pig:
+$PIG_HOME/bin/pig
+如果能正常进入grunt > 提示符就表示ok了
+
+
+See below guide for basic usage:
+https://www.cnblogs.com/yjmyzz/p/hadoop-pig-tutorial.html
+
+
+
+
+
