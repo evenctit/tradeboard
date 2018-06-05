@@ -1,0 +1,9 @@
+Flume安装及操作
+
+安装配置：只需将flume的压缩文件解压即可
+
+
+采集日志：
+	参考a4.conf文件
+
+	启动flume:bin/flume-ng agent -n a4 -f myagent/a4.conf -c conf -Dflume.root.logger=INFO,console

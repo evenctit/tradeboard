@@ -1,0 +1,39 @@
+Hbase 搭建
+伪分布式
+
+.bash_profile 配置Hbase环境变量
+	export HBASE_HOME="/usr/local/software/hbase-1.3.1"
+	export PATH=$HBASE_HOME/bin:$PATH
+
+hbase-site.xml
+<!---->
+	
+	<!--HDFS的地址，hbase文件自动创建-->
+	<property>
+         <name>hbase.rootdir</name>
+         <value>hdfs://192.168.59.130:9000/hbase</value>
+    </property>
+	<!--ZK地址-->
+    <property>
+         <name>hbase.zookeeper.quorum</name>
+         <value>192.168.59.130</value>
+    </property
+	
+	<!--是否是集群-->
+	<property>
+         <name>hbase.cluster.distributed</name>
+         <value>true</value>
+    </property>
+<!--冗余度-->
+	<property>
+         <name>dfs.replication</name>
+         <value>1</value>
+    </property>
+	
+hbase-env.xml
+
+	export HBASE_MANAGES_ZK=true 启用自身ZK
+
+
+regionservers,配置从节点IP或者hostname,对于分布式，主从节点IP一样
+
