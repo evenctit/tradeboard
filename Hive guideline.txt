@@ -1,0 +1,39 @@
+解压hive包
+tar -zxvf apache-hive-2.3.0-bin.tar.gz 到指定目录
+配置环境变量
+export HIVE_HOME=/usr/local/software/apache-hive-2.3.0-bin
+export PATH=$HIVE_HOME/bin:$PATH
+
+配置文件vi hive-site.xml(没有这个文件，直接vi创建)
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+ <property>
+    <name>javax.jdo.option.ConnectionURL</name>
+   <value>jdbc:mysql://localhost:3306/hive?useSSL=false</value>
+  </property>
+  
+   <property>
+    <name>javax.jdo.option.ConnectionDriverName</name>
+   <value>com.mysql.jdbc.Driver</value>
+  </property>
+  
+     <property>
+    <name>javax.jdo.option.ConnectionUserName</name>
+   <value>hiveowner</value>
+  </property>
+  
+   <property>
+    <name>javax.jdo.option.ConnectionPassword</name>
+   <value>Estelle_1</value>
+  </property>
+
+</configuration>
+
+将MySQL的jar包放入bin目录下
+mysql-connector-java-5.1.43-bin.jar
+
+
+初始化数据库
+schematool -dbType mysql -initSchema
