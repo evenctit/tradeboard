@@ -1,0 +1,37 @@
+
+#利用flume采集数据，将如下配置文件拷贝到./apache-flume-1.7.0-bin/myagent 下并命名为a4
+#执行如下该命令用于数据采集bin/flume-ng agent -n a4 -f myagent/a4.conf -c conf -Dflume.root.logger=INFO,console
+
+a4.sources = r1
+a4.channels = c1
+a4.sinks = k1
+
+#spoolDir对应的是本地数据文件路径
+a4.sources.r1.type = spooldir
+a4.sources.r1.spoolDir = /usr/local/datasource
+
+
+a4.channels.c1.type = memory
+a4.channels.c1.capacity = 10000
+a4.channels.c1.transactionCapacity = 100
+
+
+a4.sources.r1.interceptors = i1
+a4.sources.r1.interceptors.i1.type = org.apache.flume.interceptor.TimestampInterceptor$Builder
+
+
+a4.sinks.k1.type = hdfs
+a4.sinks.k1.hdfs.path = hdfs://192.168.59.130:9000/flume/%Y%m%d
+a4.sinks.k1.hdfs.filePrefix = events-
+a4.sinks.k1.hdfs.fileType = DateStream
+
+
+a4.sinks.k1.hdfs.rollCount = 0
+#HDFS上的文件达到128M时生成一个文件
+a4.sinks.k1.hdfs.rollSize = 134217728
+#HDFS上的文件达到60秒生成一个文件
+a4.sinks.k1.hdfs.rollInterval = 60
+
+
+a4.sources.r1.channels = c1
+a4.sinks.k1.channel = c1
