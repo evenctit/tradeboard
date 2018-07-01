@@ -1,0 +1,15 @@
+使用方法
+
+      1）相同版本
+
+      #hadoop  distcp  -p  -skipcrccheck  -update  –m 10 \
+ hdfs://bigdata2:9000/usr/local/datasource \
+ hdfs://Estelle:9000//usr/local/datasource \
+
+      参数解释：
+
+      -p：带权限复制
+
+      -skipcrccheck: 跳过hdfs检查
+
+      -update: 比较两边文件的大小，如果不一样就更新，相同就不操作

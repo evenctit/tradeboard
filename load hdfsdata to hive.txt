@@ -1,0 +1,35 @@
+//1.create table
+
+create table INVC_MASTER
+(AI_NUM 		        string,
+C_MAIN_REF	        string,
+AI_AMT		        int,
+INT_AMT		        int,
+CHARGE_AMT		    int,
+AI_DT		        string,
+AI_DUE_DT		    string,
+AI_OVD_FEE		    int,
+AI_SET_DT		    string,
+AI_STAT_BUYER_CD   	string,
+AI_STAT_STAFF_CD   	string,
+AI_STAT_SUPLR_CD    string,
+AI_UPLD_DT		    string,
+BUYER_ID		    string,
+BUYER_NM		    string,
+CCY		      	      string,
+EPP_ID		        string,
+EPP_NM		        string,
+EPP_SUPR_ID		    string,
+IS_FUNDED		    string,
+OVD_INT_AMT		    int,
+OVD_INT_RATE	    int,
+SUPLR_ID		    string,
+SUPLR_NM		    string,
+OVD_DT		        string,
+AI_DESC		        string,
+GOOD_DESC		    string) 
+row format delimited fields terminated by ',';
+
+
+//2. load hdfs data to hive
+load  data inpath '/hdfs-datapath/datafile/INVC_MASTER.csv into table INVC_MASTER
